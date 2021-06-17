@@ -11,9 +11,9 @@ public interface CrudDao<T> {
 
     ResultSet readAll() throws SQLException;
 
-    T update(Long id);
+    ResultSet update(T object) throws SQLException;
 
-    T delete(Long id);
+    Integer delete(Integer id) throws SQLException;
 
 }
 

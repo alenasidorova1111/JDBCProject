@@ -8,59 +8,78 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         SubscriberConsoleOutput sc = new SubscriberConsoleOutput();
+
+        System.out.println("""
+                Welcome to Phone Data Base! Please enter the number of command you need:\s
+                1 - to insert new subscriber to DB
+                2 - to get subscriber's info
+                3 - to get all subscribers
+                4 - to update subscribers info
+                5 - to delete subscriber
+                6 - to get oldest subscriber
+                7 - to finish work
+                Enter command:\040\040\040""");
+
         Scanner scanner = new Scanner(System.in);
 
-        int readCommand = scanner.nextInt();
-        ////Scanner scanner = new Scanner(System.in);
-        //
-        //try {
-        //    readCommand = scanner.nextInt();
-        //    if (readCommand<1 | readCommand>6) {
-        //        throw new InputMismatchException("Only these commands are available at this moment: 1, 2, 3, 4, 5, 6");
-        //    }
-        //} catch (Exception e) {
-        //    throw new InputMismatchException("Please enter integer number without any other symbols");
-        //}
+        int readCommand;
 
-        while (readCommand != 6) {
-
-            try {
-                readCommand = scanner.nextInt();
-                if (readCommand < 1 | readCommand > 6) {
-                    throw new InputMismatchException("Only these commands are available at this moment: 1, 2, 3, 4, 5, 6");
-                }
-            } catch (Exception e) {
-                throw new InputMismatchException("Please enter integer number without any other symbols");
+        try {
+            readCommand = scanner.nextInt();
+            if (readCommand < 1 | readCommand > 7) {
+                throw new InputMismatchException();
             }
+        } catch (Exception e) {
+            throw new InputMismatchException("Please enter available integer number without any other symbols");
+        }
 
-            System.out.println("Welcome to Phone Data Base! \n" +
-                    "Please enter the number of command you need: \n" +
-                    "1 - to get subscriber's info\n" +
-                    "2 - to get all subscribers\n" +
-                    "3 - to update subscribers info\n" +
-                    "4 = to insert new subscriber to DB\n" +
-                    "5 - to delete subscriber\n" +
-                    "6 - to finish work");
-
-            //Integer choise = scanner.nextInt();
-
-            //boolean runDefault = false;
+        while (readCommand != 7) {
+            Scanner sca = new Scanner(System.in);
 
             switch (readCommand) {
-                case 1: {
-                    System.out.println("Please enter subscriber's lastname:\n");
-                    String lastName = scanner.nextLine();
+                case 1 -> {
+                    System.out.println("Please enter subscriber's firstname, lastname, city, age and sex," +
+                            "using whitespaces:   ");
+                    String subscribersData = sca.nextLine();
+                    sc.outputCreatedSubscriber(subscribersData);
+                    System.out.println("Enter new command:   ");
+                    readCommand = scanner.nextInt();
+                }
+                case 2 -> {
+                    System.out.println("Please enter subscriber's lastname:   ");
+                    String lastName = sca.nextLine();
                     sc.outputSubscriber(lastName);
-                    break;
+                    System.out.println("Enter new command:   ");
+                    readCommand = scanner.nextInt();
                 }
-                case 2: {
+                case 3 -> {
                     sc.outputAllSubscribers();
-                    break;
+                    System.out.println("Enter new command:   ");
+                    readCommand = scanner.nextInt();
                 }
-
+                case 4 -> {
+                    System.out.println("Please enter subscriber's id, new: firstname, lastname, city, age and sex," +
+                            "using whitespaces:   ");
+                    String subscribersData = sca.nextLine();
+                    sc.outputUpdatedSubscriber(subscribersData);
+                    System.out.println("Enter new command:   ");
+                    readCommand = scanner.nextInt();
+                }
+                case 5 -> {
+                    System.out.println("Please enter subscriber's id:   ");
+                    Integer id = sca.nextInt();
+                    sc.outputSubscriberWasDeleted(id);
+                    System.out.println("Enter new command:   ");
+                    readCommand = scanner.nextInt();
+                }
+                case 6 -> {
+                    sc.outputOldestSubscriber();
+                    System.out.println("Enter new command:   ");
+                    readCommand = scanner.nextInt();
+                }
             }
-
-
         }
+
+        System.out.println("See you soon!");
     }
 }

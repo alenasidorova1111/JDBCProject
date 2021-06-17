@@ -12,13 +12,14 @@ public class DBConnection {
     public static Statement st;
 
 
-    public Connection createConnection() {
+    public Connection createConnection() throws SQLException {
         try {
             conn = DriverManager.getConnection(URL, USER, PASS);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
         }
+        conn.setAutoCommit(true);
         return conn;
     }
 
@@ -44,7 +45,7 @@ public class DBConnection {
 
     public void closePrepStatement(PreparedStatement ps) {
         try {
-            if (ps != null){
+            if (ps != null) {
                 ps.close();
             }
         } catch (SQLException e) {
@@ -54,7 +55,7 @@ public class DBConnection {
 
     public void closeConnection(Connection conn) {
         try {
-            if (conn != null){
+            if (conn != null) {
                 conn.close();
             }
         } catch (SQLException e) {
@@ -64,7 +65,7 @@ public class DBConnection {
 
     public void closeStatement(Statement st) {
         try {
-            if (st != null){
+            if (st != null) {
                 st.close();
             }
         } catch (SQLException e) {

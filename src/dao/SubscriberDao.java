@@ -1,9 +1,12 @@
 package dao;
-import com.lab.dao.CrudDao;
+
 import domain.Subscriber;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public interface SubscriberDao extends CrudDao<Subscriber> {
 
-    Subscriber getOldest();
+    ResultSet getOldest() throws SQLException;
 
 }
