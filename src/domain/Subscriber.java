@@ -72,7 +72,7 @@ public class Subscriber {
     }
 
     public String toString() {
-        return "Name: " + firstName + " " + lastName + " | City: " + city + " | Age: " + age + " | Sex: " + sex;
+        return "ID: " + id + " | Name: " + firstName + " " + lastName + " | City: " + city + " | Age: " + age + " | Sex: " + sex;
     }
 
 }

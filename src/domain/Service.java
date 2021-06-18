@@ -2,14 +2,24 @@ package domain;
 
 public class Service {
 
+    private Integer id;
+
     private String name;
 
     private Double cost;
 
-
-    public Service(String name, Double cost) {
+    public Service(Integer id, String name, Double cost) {
+        this.id = id;
         this.name = name;
         this.cost = cost;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -29,7 +39,7 @@ public class Service {
     }
 
     public String toString() {
-        return name + " " + cost;
+        return "ID: " + id + " | Name: " + name + " | Cost: " + cost;
     }
 
 }
